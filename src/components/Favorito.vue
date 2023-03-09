@@ -1,11 +1,11 @@
 <template>
-  <section class="row flex-center" style="height:90vh">
+  <section class="row justify-center" style="height:90vh">
     <article class="col-12 flex flex-center">
-      <b><h2 class="q-my-xl" v-bind:style="$q.screen.lt.md ? {fontSize:'30px'}:{fontSize:'48px'}">TUS COMICS FAVORITOS</h2></b>
+      <b><h2 class="" v-bind:style="size">TUS COMICS FAVORITOS</h2></b>
     </article>
     <article v-for="value in guardar" :key="value.id"
         class=" flex flex-center content-center col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-        <q-card style="width: 100%; height: 95%;" class="q-ma-md text-center card">
+        <q-card style="width: 100%; height: 95%;" class="q-ma-md text-center">
           <q-card-section style="width: 100%; height:100%">
             <q-img fit="cover" style="width: 100%; height:100%" :src=value.thumbnail.path+punto+value.thumbnail.extension>
               <div class="absolute-bottom text-subtitle2 text-center texto">
@@ -21,12 +21,18 @@
 <script setup>
 import { useQuasar } from 'quasar';
 import { Screen } from 'quasar'
-import {ref} from "vue";
+import {ref, computed} from "vue";
 import axios from "axios";
 import {useStore} from "../stores/store.js"
 Screen.setSizes({ sm: 400, md: 800, lg: 1200, xl: 2400 });
-
 const $q = useQuasar();
+
+const size = computed(()=>{
+  if($q.screen.lt.md){
+    return {fontSize:'30px',margin:'0 0','line-height':'inherit'}
+  }
+  return {fontSize:'48px','line-height':'inherit', margin:'0 0'}
+});
 
 const showLoading = () => {
   $q.loading.show({
@@ -36,7 +42,6 @@ const showLoading = () => {
 }
 const store = useStore();
 const punto = ref('.')
-
 const favoritos = ref([])
 const traerFavoritos = () => {
   showLoading();
