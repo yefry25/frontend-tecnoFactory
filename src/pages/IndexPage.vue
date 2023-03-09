@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center" style="height:90vh" v-bind:style="$q.screen.lt.sm ? {backgroundColor:'rgba(0, 0, 0, 0.8)'}:{width: '90vh'}">
+  <q-page class="flex flex-center" style="height:90vh" v-bind:style="$q.screen.lt.sm ? {backgroundColor:'rgba(0, 0, 0, 0.8)'}:{height: '90vh'}">
     <img
       fit="cover"
       alt="Marvel"
