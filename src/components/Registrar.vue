@@ -18,8 +18,14 @@
                 <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd" />
               </template>
             </q-input>
+            <q-input v-model="passwordConfirm" :type="isPwdConfirm ? 'passwordConfirm' : 'text'" label="Confirma tu contraseña *" lazy-rules
+              :rules="passwordConfirmRules">
+              <template v-slot:append>
+                <q-icon :name="isPwdConfirm ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwdConfirm = !isPwdConfirm" />
+              </template>
+            </q-input>
             <article>
-              <q-btn class="full-width rounded bg-primary" type="submit" label="Registrar"></q-btn>
+              <q-btn class="full-width rounded bg-primary q-mt-xs" type="submit" label="Registrar"></q-btn>
             </article>
           </q-form>
         </q-card-section>
@@ -40,6 +46,7 @@ const identificacion = ref('');
 const nombre = ref('');
 const correo = ref('');
 const password = ref('');
+const passwordConfirm = ref('')
 
 const showLoading = () => {
   $q.loading.show({
@@ -76,7 +83,7 @@ const registrar = () => {
 }
 const identificacionRules = [
   val => (val && val.length > 0) || 'Por favor digite un número de identificación',
-  val => (val.length > 8) || 'El número de identificación debe ser mayor a 8 caracteres'
+  val => (val.length > 6) || 'El número de identificación debe ser mayor a 6 caracteres'
 ]
 const nombreRules = [
   val => (val && val.length > 0) || 'Por favor digite su nombre completo',
@@ -88,7 +95,12 @@ const passwordRules = [
   val => (val !== null && val !== '') || 'Por favor escriba su contraseña',
   val => (val.length > 7) || 'Debe tener 8 o mas dígitos '
 ]
+const passwordConfirmRules = [
+  val => (val !== null && val !== '') || 'Por favor escriba la confirmación de su contraseña',
+  val => (val == password.value) || 'La contraseña no coincide'
+]
 const isPwd = ref(true)
+const isPwdConfirm = ref(true)
 </script>
 
 <style lang="scss" scoped>

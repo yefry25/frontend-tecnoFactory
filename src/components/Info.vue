@@ -41,7 +41,7 @@
                   <h4 class="h4" style="font-size:20px"><b>Penciler:</b></h4>
                   <h4 class="h4" style="font-size:16px">{{ penciller }}</h4>
                 </div>
-                <p class="h4" style="font-size:14px">{{ store.detalleComic.description }}</p>
+                <p class="h4" v-bind:style="styleDescription">{{ store.detalleComic.description }}</p>
                 <q-btn class="q-ml-lg" color="red" icon="mdi-heart-box" @click="fav"></q-btn>
               </article>
             </section>
@@ -55,14 +55,17 @@
 <script setup>
 import { Screen } from 'quasar'
 import { useQuasar } from "quasar";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import axios from "axios";
 import { useStore } from "../stores/store.js"
-Screen.setSizes({ sm: 600, md: 1024, lg: 1440, xl: 2000 });
+Screen.setSizes({ sm: 600, md: 1200, lg: 1440, xl: 2000 });
 const store = useStore();
 const $q = useQuasar();
 const punto = (".")
 
+const styleDescription = computed(()=>{
+  return {'font-size':'16px','max-width':'500px'}
+})
 const showLoading = () => {
   $q.loading.show({
     message: 'Doing something. Please wait...',
@@ -131,11 +134,9 @@ creator();
   height: 100%;
   position: relative;
 }
-
 .img {
   height: 90vh;
 }
-
 .text {
   top: 0;
   position: absolute;

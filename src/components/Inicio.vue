@@ -1,10 +1,10 @@
 <template>
   <section class="row font justify-center" style="height:90vh">
     <article class="col-12 flex flex-center">
-      <b><h2 class="q-my-xl" v-bind:style="$q.screen.lt.md ? {fontSize:'34px'}:{fontSize:'48px'}">COMICS DE MARVEL</h2></b>
+      <b><h2 class="q-my-md" v-bind:style="$q.screen.lt.md ? {fontSize:'34px'}:{fontSize:'48px'}">COMICS DE MARVEL</h2></b>
     </article>
       <article v-for="value in comic" :key="value.id"
-        class=" flex flex-center content-center col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+        class=" flex col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
         <q-card style="width: 100%; height: 95%;" class="q-ma-md text-center card">
           <a href="#/Info" style="text-decoration: none" @click="favorito(value)">
           <q-card-section style="width: 100%; height:100%">
